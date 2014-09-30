@@ -232,3 +232,10 @@ Create overrides for specific relationships using composition.
 
 .person .favorite-thing {}
 ```
+
+#### Why No Cascade?
+
+The only thing that `person` and `favorite-thing` share is layout proximity. Change
+the layout, break the stylesheet. Don't be confused. This proximity is a coincidence.
+
+If `favorite-thing` needs different rules, subclass it.
