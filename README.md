@@ -71,27 +71,29 @@ an `-item` representation without the context of a `-list`.
 
 Choose and be consistent. "How" doesn't matter.
 
-## A Single Resource (#show)
+## A Single Resource (show)
 
 Name a single resource after its Class.
 
+JSON
 ```json
 {
   "person": {}
 }
 ```
 
+HTML
 ```html
 <div class="person">
   ...
 </div>
 ```
 
-## Naming A Resource Collection (#list)
+## Naming A Resource Collection (list)
 
 Name a collection after its singular Class with a `-list` suffix.
 
-
+JSON
 ```json
 {
   "people": [
@@ -101,25 +103,22 @@ Name a collection after its singular Class with a `-list` suffix.
 }
 ```
 
+HTML
 ```html
 <ul class="person-list">
   ...
 </ul>
 ```
 
-#### Alternative
-
 You may prefer `people` to `person-list`. I don't.
 
-
-## Naming A Resource Collection Item (#list(each))
-
+## Naming A Resource Collection Item (each)
 
 Name a collection item after its singular Class with a `-item` suffix.
 
 You may be tempted to re-purpose `person`. Don't.
 
-
+JSON
 ```json
 {
   "people": [
@@ -129,17 +128,18 @@ You may be tempted to re-purpose `person`. Don't.
 }
 ```
 
+HTML
 ```html
 <li class="person-item">...</li>
 <li class="person-item">...</li>
 ```
 
+## Example: Contact List (Single and Collection)
 
-## Sample of Single and Collection of Resources
-
-Consider a contact-list. You have a layout featuring a single person, from a
+Consider a contact-list. You have a layout showing a single person, from a
 list of people.
 
+JSON
 ```json
 {
   "people": [
@@ -150,6 +150,7 @@ list of people.
 }
 ```
 
+HTML
 ```html
 <div class="person" id="1">
   ...
@@ -161,12 +162,12 @@ list of people.
 </ul>
 ```
 
-## Handling Nested Resources
+## Nested Resources
 
-If `-list` and `-item` conventions are followed, nested resources are naturally
-handled.
+If `-list` and `-item` conventions are followed, nested resources are handled
+out of the box.
 
-
+JSON
 ```json
 {
   "person": {
@@ -178,6 +179,7 @@ handled.
 }
 ```
 
+HTML
 ```html
 <div class="person">
   <ul class="favorite-thing-list">
@@ -187,8 +189,7 @@ handled.
 </div>
 ```
 
-
-## Handling Nested Resources with Relationship Specific Styles
+## Nested Resources with Relationship-Specific Style
 
 Create overrides for specific relationships using composition.
 
