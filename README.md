@@ -20,7 +20,7 @@ Name a single resource after its Class.
 
 ```json
 {
-  person {}
+  "person": {}
 }
 ```
 
@@ -37,7 +37,7 @@ Name a collection after its singular Class with a `-list` suffix.
 
 ```json
 {
-  people: [
+  "people": [
     {},
     {}
   ]
@@ -65,7 +65,7 @@ You may be tempted to re-purpose `person`. Don't.
 
 ```json
 {
-  people: [
+  "people": [
     {},
     {}
   ]
@@ -85,10 +85,10 @@ list of people.
 
 ```json
 {
-  people: [
-    { id: 1 },
-    { id: 2 },
-    { id: 3 }
+  "people": [
+    { "id": 1 },
+    { "id": 2 },
+    { "id": 3 }
   ]
 }
 ```
@@ -112,10 +112,10 @@ handled.
 
 ```json
 {
-  person: {
-    favorite_things: [
-      { name: "raindrops on roses" },
-      { name: "whiskers on kittens" }
+  "person": {
+    "favorite_things": [
+      { "name": "raindrops on roses" },
+      { "name": "whiskers on kittens" }
     ]
   }
 }
@@ -137,10 +137,10 @@ Create overrides for specific relationships using composition.
 
 ```json
 {
-  person: {
-    favorite_things: [
-      { name: "raindrops on roses" },
-      { name: "whiskers on kittens" }
+  "person": {
+    "favorite_things": [
+      { "name": "raindrops on roses" },
+      { "name": "whiskers on kittens" }
     ]
   }
 }
