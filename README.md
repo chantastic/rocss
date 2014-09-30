@@ -10,13 +10,77 @@ stylesheets.
 
 ## How To Read This Document
 
-The patterns are prescriptive. The execution is up to you. I'm using BEM and
-OOCSS to describe my markup objects. You're free to use whatever you seed fit.
+The examples in this readme use BEM and OOCSS for illustration. But this
+approach is at home in any CSS naming system.
+
+## The Basic Idea
+
+The idea is simple: have unique names for common representations of a resource.
+
+The APIs we interact with predominantly return JSON. In JSON, you have ways a
+resource might be represented:
+
+* Single Resource          — "person": {}
+* Resource Collection      — "people": []
+* Resource Collection Item — "people": [{ "id": 1 }]
+
+The first two are obvious. The third is less obvious. Your instinct might be to
+represent the third like this:
+
+```html
+<ul class="people">
+  <li class="person"></li>
+  <li class="person"></li>
+</ul>
+```
+
+This seems harmless. In fact, it likely maps to verbiage in your tamplate perfectly.
+But what happens when when your layout grows to include a dialog which shows the
+single resource fully? You've used `.person` to describe the iterated resources.
+Now you must decide what to name your representation of the single resource.
+
+This problem continues as you go to style a 'show' page. You can borrow
+styles from `.person` but you end up redefining most of the class and eventually
+forking it off into something unsightly, like `.person-full`, `.person-big`, or
+worse `.person-show`.
+
+You can avoid this completely by considering the regular resource-types up front:
+
+```css
+.person {}      /* a single resource */
+.person-list {} /* a resource collection */
+.person-item {} /* a resource collection item */
+```
+
+## A Word on Alternatations
+
+There are a number of possibilities naming. If the ones I've suggested don't
+bother you, use them. They are the most universally useful.
+
+I've also tried these configurations:
+
+```css
+/* pluralized */
+.person {}
+.people {}
+.people-each {}
+```
+
+```css
+/* verbose */
+.person {}
+.person-list {}
+.person-list-item {}
+```
+
+These are both fine. But there were resources, layouts, and circumstances that
+make these hard to talk and reason about. I no longer reach for these iterations.
+
+Whatever you choose, be consistent.
 
 ## Naming A Single Resource (#show)
 
 Name a single resource after its Class.
-
 
 ```json
 {
