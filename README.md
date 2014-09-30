@@ -45,7 +45,7 @@ You can avoid this completely by considering common resource-types up front:
 .person-item {} /* a resource collection item */
 ```
 
-## Don't Like -list and -item?
+### Don't Like -list and -item?
 
 You're not alone. But don't fixate the execution isn't the important part.
 
@@ -64,12 +64,23 @@ I've tried these:
 .person-list {}
 .person-list-item {}
 ```
-
 These are both fine. The trouble is that they felt unnatural in some layouts, or
 when working with oddly named resources. Opportunities arise when I might need
 an `-item` representation without the context of a `-list`.
 
 Choose and be consistent. "How" doesn't matter.
+
+### Rails-Flavored
+
+@danott has a great Rails-Flavored class set:
+
+```css
+.person
+.people
+._person
+```
+
+This maps beautifully with Rails conventions.
 
 ## A Single Resource (show)
 
