@@ -1,31 +1,24 @@
 ROCSS
 =====
 
-A sensible approach to resource-driven stylesheets.
+A sensible approach to resource heavy stylesheets.
 
-## TL;DR
+## What's Important?
 
-Resource Oriented CSS is better naming conventions for resource heavy
-stylesheets.
-
-## How To Read This Document
-
-The examples in this readme use BEM and OOCSS for illustration. But this
-approach is at home in any CSS naming system.
+There's only one take-away: choose a convention for three resource types up
+front and stick with it.
 
 ## The Basic Idea
 
-The idea is simple: have unique names for common representations of a resource.
-
-The APIs we interact with predominantly return JSON. In JSON, you have ways a
-resource might be represented:
+We work with JSON APIs. JSON is predictable. You have three ways a might be
+represented:
 
 * Single Resource          — "person": {}
 * Resource Collection      — "people": []
 * Resource Collection Item — "people": [{ "id": 1 }]
 
-The first two are obvious. The third is less obvious. Your instinct might be to
-represent the third like this:
+The first two are obvious. The third is less obvious. Your instinct is likely to
+represent the third resource type like this:
 
 ```html
 <ul class="people">
@@ -34,17 +27,17 @@ represent the third like this:
 </ul>
 ```
 
-This seems harmless. In fact, it likely maps to verbiage in your tamplate perfectly.
-But what happens when when your layout grows to include a dialog which shows the
-single resource fully? You've used `.person` to describe the iterated resources.
-Now you must decide what to name your representation of the single resource.
+This seems harmless. In fact, verbiage probably maps to your template perfectly.
+But what happens when when your layout grows to include a dialog which shows a
+full representation of a single resource? You've used `.person` to describe the
+iterated resources.  Now you're forced to decide what to name your single resource.
 
 This problem continues as you go to style a 'show' page. You can borrow
-styles from `.person` but you end up redefining most of the class and eventually
-forking it off into something unsightly, like `.person-full`, `.person-big`, or
+styles from `.person` but you'll end up redefining most of the class and eventually
+forking it into something unsightly, like `.person-full`, `.person-big`, or
 worse `.person-show`.
 
-You can avoid this completely by considering the regular resource-types up front:
+You can avoid this completely by considering common resource-types up front:
 
 ```css
 .person {}      /* a single resource */
@@ -52,12 +45,11 @@ You can avoid this completely by considering the regular resource-types up front
 .person-item {} /* a resource collection item */
 ```
 
-## A Word on Alternatations
+## Don't Like -list and -item?
 
-There are a number of possibilities naming. If the ones I've suggested don't
-bother you, use them. They are the most universally useful.
+You're not alone. But don't fixate the execution isn't the important part.
 
-I've also tried these configurations:
+I've tried these:
 
 ```css
 /* pluralized */
@@ -73,12 +65,13 @@ I've also tried these configurations:
 .person-list-item {}
 ```
 
-These are both fine. But there were resources, layouts, and circumstances that
-make these hard to talk and reason about. I no longer reach for these iterations.
+These are both fine. The trouble is that they felt unnatural in some layouts, or
+when working with oddly named resources. Opportunities arise when I might need
+an `-item` representation without the context of a `-list`.
 
-Whatever you choose, be consistent.
+Choose and be consistent. "How" doesn't matter.
 
-## Naming A Single Resource (#show)
+## A Single Resource (#show)
 
 Name a single resource after its Class.
 
