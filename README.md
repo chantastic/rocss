@@ -47,9 +47,9 @@ You can avoid this completely by considering common resource-types up front:
 
 ### Don't Like -list and -item?
 
-You're not alone. But don't fixate the execution isn't the important part.
+But don't fixate. The execution isn't the important part.
 
-I've tried these:
+I've tried these iterations:
 
 ```css
 /* pluralized */
@@ -72,7 +72,7 @@ Choose and be consistent. "How" doesn't matter.
 
 ### Rails-Flavored
 
-@danott has a great Rails-Flavored class set:
+@danott recommended a great Rails-Flavored class set:
 
 ```css
 .person
