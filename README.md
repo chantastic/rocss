@@ -29,8 +29,8 @@ In Rails, that might look like so:
 
 There are two ways that we see see a resource represented in RESTful systems.
 
-* Single Resource          — `"resoure":   { "id": 1 }`
-* Resource Collection Item — `"resource": [{ "id": 1 }]`
+* Single Resource          — `"resoure": { "id": 1 }`
+* Resource Collection Item — `"resources": [{ "id": 1 }]`
 
 When put in a UI, these rarely look similar. The first is used to _show_ the
 full detail of a resource, while the second represents an actionable subset of
