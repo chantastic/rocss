@@ -39,21 +39,21 @@ that resources data.
 The canonical example of this is an email client:
 
 ```
-+------------------------------------------------------------------------------+
-|                               * Email *                                      |
-+------------------------------------------------------------------------------+
-|                              |                                               |
-|  Someone:  Totally Impo...  <   From: Someone                                |
-|                              |  To:   Me                                     |
-|------------------------------|                                               |
-|                              |  Subject: Totally important                   |
-|  Mistress: We really ne...   |                                               |
-|                              |                                               |
-|------------------------------|  Hello Me,                                    |
-|                              |                                               |
-|  Buddy: Bro! check it out!   |  This is totally an important message.        |
-|                              |                                               |
-+------------------------------------------------------------------------------+
++----------------------------------------------------------------------------------+
+|                                   * Email *                                      |
++----------------------------------------------------------------------------------+
+|                              |                                                   |
+|  Someone:  Totally Impo...  <   From: Someone                                    |
+|                              |  To:   Me                                         |
+|------------------------------|                                                   |
+|                              |  Subject: Totally important                       |
+|  Mistress: We really ne...   |                                                   |
+|                              |                                                   |
+|------------------------------|  Hello Me,                                        |
+|                              |                                                   |
+|  Buddy: Bro! check it out!   |  This is totally an important message. Take ...   |
+|                              |                                                   |
++----------------------------------------------------------------------------------+
 ```
 
 On the left there you have _item_ representations of resources with a _full_
