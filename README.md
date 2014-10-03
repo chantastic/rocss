@@ -3,88 +3,88 @@ ROCSS
 
 A sensible approach to resource heavy stylesheets.
 
-## What's Important?
+## TL;DR
 
-There's only one take-away: choose a convention for three resource types up
-front and stick with it.
+Contemporary applications represent resource data in two ways:
+
+1. As a detailed description
+1. As an item in a list
+
+Most applications don't have a pattern for writing CSS classes in a way that
+reflects this UI pattern. I recommend the this:
+
+```css
+.resource {}
+.resource-item {}
+```
+
+In Rails, that might look like so:
+
+```css
+.resource {}
+._resource {}
+```
 
 ## The Basic Idea
 
-We work with JSON APIs. JSON is predictable. You have three ways a might be
-represented:
+There are two ways that we see see a resource represented in RESTful systems.
 
-* Single Resource          — "person": {}
-* Resource Collection      — "people": []
-* Resource Collection Item — "people": [{ "id": 1 }]
+* Single Resource          — `"resoure":   { "id": 1 }`
+* Resource Collection Item — `"resource": [{ "id": 1 }]`
 
-The first two are obvious. The third is less obvious. Your instinct is likely to
-represent the third resource type like this:
+When put in a UI, these rarely look similar. The first is used to _show_ the
+full detail of a resource, while the second represents an actionable subset of
+that resources data.
 
-```html
-<ul class="people">
-  <li class="person"></li>
-  <li class="person"></li>
-</ul>
+The canonical example of this is an email client:
+
+```
++------------------------------------------------------------------------------+
+|                               * Email *                                      |
++------------------------------------------------------------------------------+
+|                              |                                               |
+|  Someone:  Totally Impo...  <   From: Someone                                |
+|                              |  To:   Me                                     |
+|------------------------------|                                               |
+|                              |  Subject: Totally important                   |
+|  Mistress: We really ne...   |                                               |
+|                              |                                               |
+|------------------------------|  Hello Me,                                    |
+|                              |                                               |
+|  Buddy: Bro! check it out!   |  This is totally an important message.        |
+|                              |                                               |
++------------------------------------------------------------------------------+
 ```
 
-This seems harmless. In fact, verbiage probably maps to your template perfectly.
-But what happens when when your layout grows to include a dialog which shows a
-full representation of a single resource? You've used `.person` to describe the
-iterated resources.  Now you're forced to decide what to name your single resource.
+On the left there you have _item_ representations of resources with a _full_
+resource on the right.
 
-This problem continues as you go to style a 'show' page. You can borrow
-styles from `.person` but you'll end up redefining most of the class and eventually
-forking it into something unsightly, like `.person-full`, `.person-big`, or
-worse `.person-show`.
-
-You can avoid this completely by considering common resource-types up front:
+The class names for each presentation should be consistent from resource to
+resource. I use this:
 
 ```css
-.person {}      /* a single resource */
-.person-list {} /* a resource collection */
-.person-item {} /* a resource collection item */
+.resource {}       /* .email {}      */
+.resource-item {}  /* .email-item {} */
 ```
 
-### Don't Like -list and -item?
+### Don't like -item?
 
-But don't fixate. The execution isn't the important part.
+Some people don't the `-item` suffix. Fortunately, that part
+really isn't important. Name it however you like.
 
-I've tried these iterations:
+A pattern that I like in Rails is to use an `_` prefixed. It's less
+communicative but maps well with Rails conventions.
 
 ```css
-/* pluralized */
-.person {}
-.people {}
-.people-each {}
+.person  {}
+._person {}
 ```
 
-```css
-/* verbose */
-.person {}
-.person-list {}
-.person-list-item {}
-```
-These are both fine. The trouble is that they felt unnatural in some layouts, or
-when working with oddly named resources. Opportunities arise when I might need
-an `-item` representation without the context of a `-list`.
-
-Choose and be consistent. "How" doesn't matter.
-
-### Rails-Flavored
-
-@danott recommended a great Rails-Flavored class set:
-
-```css
-.person
-.people
-._person
-```
-
-This maps beautifully with Rails conventions.
+_Hat-tip to @danott_
 
 ## A Single Resource (show)
 
-Name a single resource after its Class.
+Name a single resource after its resource name.
 
 JSON
 ```json
@@ -100,83 +100,64 @@ HTML
 </div>
 ```
 
-## Naming A Resource Collection (list)
+## Naming A Resource Collection Item (list)
 
-Name a collection after its singular Class with a `-list` suffix.
-
-JSON
-```json
-{
-  "people": [
-    {},
-    {}
-  ]
-}
-```
-
-HTML
-```html
-<ul class="person-list">
-  ...
-</ul>
-```
-
-You may prefer `people` to `person-list`. I don't.
-
-## Naming A Resource Collection Item (each)
-
-Name a collection item after its singular Class with a `-item` suffix.
-
-You may be tempted to re-purpose `person`. Don't.
-
-JSON
-```json
-{
-  "people": [
-    {},
-    {}
-  ]
-}
-```
-
-HTML
-```html
-<li class="person-item">...</li>
-<li class="person-item">...</li>
-```
-
-## Example: Contact List (Single and Collection)
-
-Consider a contact-list. You have a layout showing a single person, from a
-list of people.
+Name a collection item after its singularized resource name with a `-item` suffix.
 
 JSON
 ```json
 {
   "people": [
     { "id": 1 },
-    { "id": 2 },
-    { "id": 3 }
+    { "id": 2 }
   ]
 }
 ```
 
 HTML
 ```html
-<div class="person" id="1">
-  ...
+<ul>
+  <li class="person-item">...</li>
+  <li class="person-item">...</li>
+</ul>
+```
+
+## Example: Email Client (Single and Collection)
+
+
+JSON
+```json
+{
+  "email": [
+    { "id": 1, "from": "Someone", ... },
+    { "id": 2, "from": "Mistress", ... },
+    { "id": 3, "from": "Buddy", ... }
+  ]
+}
+```
+
+HTML
+```html
+<div class="email" id="1">
+  <h4>From: {email.from}</h4>
+  <h4>Subject: {email.subject}</h4>
+
+  <p>From: {email.body}</p>
 </div>
 
-<ul class="person-list">
-  <li class="person-item" id="2">...</li>
-  <li class="person-item" id="3">...</li>
+<ul>
+  <li class="email-item" id="2">
+    {email.from}
+  </li>
+  <li class="email-item" id="3">
+    {email.from}
+  </li>
 </ul>
 ```
 
 ## Nested Resources
 
-If `-list` and `-item` conventions are followed, nested resources are handled
-out of the box.
+Nested resources become very natural to handle with this pattern.
 
 JSON
 ```json
@@ -193,7 +174,7 @@ JSON
 HTML
 ```html
 <div class="person">
-  <ul class="favorite-thing-list">
+  <ul>
     <li class="favorite-thing">...</li>
     <li class="favorite-thing">...</li>
   </ul>
@@ -202,8 +183,9 @@ HTML
 
 ## Nested Resources with Relationship-Specific Style
 
-Create overrides for specific relationships using composition.
+Create overrides for specific relationships using OOCSS-style sub-classing..
 
+JSON
 ```json
 {
   "person": {
@@ -215,22 +197,24 @@ Create overrides for specific relationships using composition.
 }
 ```
 
+HTML
 ```html
 <div class="person">
-  <ul class="favorite-thing-list">
+  <ul>
     <li class="favorite-thing person-favorite-thing">...</li>
     <li class="favorite-thing person-favorite-thing">...</li>
   </ul>
 </div>
 ```
 
+CSS
 ```css
 .favorite-thing {
   // default styles
 }
 
 .person-favorite-thing {
-  // .person specific .favorite-thing overrides
+  // .person specific .favorite-thing extensions
 }
 ```
 
@@ -247,6 +231,6 @@ Create overrides for specific relationships using composition.
 #### Why No Cascade?
 
 The only thing that `person` and `favorite-thing` share is layout proximity. Change
-the layout, break the stylesheet. Don't be confused. This proximity is a coincidence.
+the layout, break the stylesheet. Don't be confused; proximity is coincidental.
 
 If `favorite-thing` needs different rules, subclass it.
