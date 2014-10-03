@@ -11,7 +11,7 @@ Contemporary applications represent resource data in two ways:
 1. As an item in a list
 
 Most applications don't have a pattern for writing CSS classes in a way that
-reflects this UI pattern. I recommend the this:
+reflects this UI pattern. I recommend this:
 
 ```css
 .resource {}
