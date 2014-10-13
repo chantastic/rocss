@@ -27,9 +27,9 @@ In Rails, that might look like so:
 
 ## The Basic Idea
 
-There are two ways that we see see a resource represented in RESTful systems.
+There are two ways that we see a resource represented in RESTful systems.
 
-* Single Resource          — `"resoure": { "id": 1 }`
+* Single Resource          — `"resource":   { "id": 1 }`
 * Resource Collection Item — `"resources": [{ "id": 1 }]`
 
 When put in a UI, these rarely look similar. The first is used to _show_ the
